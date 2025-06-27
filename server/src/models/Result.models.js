@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const ResultSchema = new mongoose.schema({
+const ResultSchema = new mongoose.Schema({
     enrollment:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Student',
+        type: String,
         required: true
     }, 
     name: {
@@ -28,4 +27,4 @@ const ResultSchema = new mongoose.schema({
     }
 }, {timestamps: true});
 
-module.exports = new mongoose.model("Result", ResultSchema);
+export const Result = mongoose.model("Result", ResultSchema);

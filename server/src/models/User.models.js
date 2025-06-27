@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, "Please Enter Department!"]
+        required: true
     },
     phone: {
         type: Number,
@@ -24,4 +24,4 @@ const UserSchema = new mongoose.Schema({
     },
 }, {timestamps: true});
 
-module.exports = mongoose.model("User", UserSchema);
+export const User = mongoose.model("User", UserSchema);

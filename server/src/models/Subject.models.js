@@ -1,11 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose"; 
 
 const SubjectSchema = new mongoose.Schema({
     subjectID: {
-        type: String,
-        required: true
-    },
-    enrollment: {
         type: String,
         required: true
     },
@@ -13,7 +9,11 @@ const SubjectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    marks: {
+    semester: {
+        type: Number,
+        required: true
+    },
+    credits: {
         type: Number,
         required: true
     },
@@ -23,4 +23,4 @@ const SubjectSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-module.exports = new mongoose.model("Subject", SubjectSchema);
+export const Subject = mongoose.model("Subject", SubjectSchema);

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const StudentSchema = new mongoose.Schema({
     name: {
@@ -11,18 +11,17 @@ const StudentSchema = new mongoose.Schema({
         unique: true
     },
     department: {
-        name: String, 
-        required: [true, "Please Enter Department!"]
+        type: String, 
+        required: true
     },
     year: {
         type: Number,
         required: true
     },
     email: {
-        type: mongoose.Schema.Types.ObjectID,
-        ref: 'User',
+        type: String,
         required: true
     },
 }, {timestamps: true});
 
-module.exports = mongoose.model("Student", StudentSchema);
+export const Student = mongoose.model("Student", StudentSchema);
