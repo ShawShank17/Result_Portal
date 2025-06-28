@@ -6,12 +6,18 @@ export const getAllResults = async (req, res) => {
 }
 
 export const getResultById = async (req, res) => {
-    const result = await Result.findById();
+    const { id } = req.params;
+    const result = await Result.findById({student: id}).populate('student');
+    if(!result || result.length==0){
+        res.status(404).json({message: "Result not found"});
+    }
     res.status(201).json(result);
 }
 
 export const submitResult = async (req, res) => {
     const newResult = new Result(req.body);
+    const foundStudent = await Student.findById(req.body.student);
+    if(!foundStudent) return res.status(404).json({message: "Student not found"});
     await newResult.save();
     res.status(201).json(newResult);
 }

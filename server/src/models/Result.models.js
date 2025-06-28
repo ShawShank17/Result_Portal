@@ -1,18 +1,23 @@
 import mongoose from "mongoose";
 
 const ResultSchema = new mongoose.Schema({
-    enrollment:{
-        type: String,
+    student:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Student',
         required: true
     }, 
-    name: {
-        type: String,
-        required: true
-    }, 
-    department: {
-        type: String,
+    semester: {
+        type: Number,
         required: true
     },
+    subjects: [
+        {
+            subjectName: {type: String, required: true},
+            marks: {
+                type: Number, required: true
+            }
+        }
+    ],
     sgpa: {
         type: Number,
         required: true
