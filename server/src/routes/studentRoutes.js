@@ -9,11 +9,16 @@ import {
     deleteStudent
 } from '../controllers/studentController.js';
 
+import {
+    verifyToken, 
+    isAdmin
+} from '../middlewares/authMiddleware.js';
+
 //Routes List
-router.get('/', getAllStudents);
-router.get('/:id', getStudentById);
-router.post('/', createStudent);
-router.put('/:id', updateStudent);
-router.delete('/:id', deleteStudent);
+router.get('/', verifyToken, getAllStudents);
+router.get('/:id', verifyToken, getStudentById);
+router.post('/', verifyToken, isAdmin, createStudent);
+router.put('/:id', verifyToken, isAdmin, updateStudent);
+router.delete('/:id', verifyToken, isAdmin, deleteStudent);
 
 export default router ;

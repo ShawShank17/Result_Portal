@@ -8,7 +8,8 @@ const UserSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -20,6 +21,9 @@ const UserSchema = new mongoose.Schema({
         enum: ['student', 'admin'],
         default: 'student'
     },
+    refreshToken: {
+        type: String
+    }
 }, {timestamps: true});
 
 UserSchema.pre('save', async function (next) {
