@@ -43,17 +43,22 @@ export const loginUser = async (req, res) => {
         if(!user){
             return res.status(400).json({message: "Invalid email or password"});
         }
-
+        console.log("User toh hai!");
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch){
             return res.status(400).json({message: "Invalid password"});
         }
-
+        //console.log("Password bhi hai!");
+        //console.log("User:", user);
+        //console.log("Password in DB:", user?.password);
         const accessToken = generateAccessToken(user);
+        //console.log("Access token bhi hai!");
         const refreshToken = generateRefreshToken(user);
+        //console.log("refresh token bhi hai!");
+        //console.log(accessToken+" "+refreshToken);
         user.refreshToken = refreshToken;
         await user.save();
-
+        //console.log("Save bhi ho gaya!");
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: true,
@@ -64,6 +69,7 @@ export const loginUser = async (req, res) => {
         return res.status(201).json({message: "Logged in successfully", accessToken});
     }
     catch(err){
+        //console.log("Error aya!");
         return res.status(500).json({message: err.message});
     }
 }
